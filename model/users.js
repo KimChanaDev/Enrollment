@@ -32,3 +32,18 @@ module.exports.saveInstructor = function(newUser, newInstructor, callback){
         });
     });
 }
+// Query by ID
+module.exports.getUserById = function(id, callback){
+    usersModel.findById(id, callback);
+}
+// Query by username
+module.exports.getUserByUsername = function(username, callback){
+    const query = { username: username}
+    usersModel.findOne(query, callback)
+}
+// compare password
+module.exports.comparePassword = function(password, hash, callback){
+    bcrypt.compare(password, hash, (err, isMatch)=>{
+        callback(null, isMatch)
+    })
+}

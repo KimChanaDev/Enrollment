@@ -9,6 +9,8 @@
 <body>
     <%- include('layout.ejs')%>
     <div class="container">
+        <%- messages() %>
+        
         <!-- jumbotron -->
         <div class="p-5 mb-4 bg-light rounded-3">
             <div class="container-fluid py-5">
@@ -17,7 +19,7 @@
               <a class="btn btn-success btn-lg" href="/user/register" type="button">สมัครเรียน</a>
             </div>
         </div>
-
+        
         <h3 align="center">คอร์สเรียน</h3>
         <% if(locals.classes) { %>
         <div class="row">
@@ -37,5 +39,9 @@
         </div>
         <% } %>
     </div>
+
+    <script type="text/javascript">
+        $('#messages').addClass('alert alert-success')
+    </script>
 </body>
 </html>

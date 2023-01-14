@@ -4,6 +4,8 @@ const { check, validationResult } = require('express-validator')
 const usersModel = require('../model/users')
 const studentsModel = require('../model/students')
 const instructorsModel = require('../model/instructors')
+const passport = require('passport') 
+const LocalStrategy = require('passport-local').Strategy
 
 router.get('/register', function(req, res, next) {
     res.render('users/register.ejs')
@@ -56,6 +58,49 @@ router.post('/register', [
       }
       res.redirect('/')
     }
+})
+
+// LOGIN--------------------------------------------------
+router.get('/login', function(req, res, next) {
+  res.render('users/login.ejs')
+});
+router.post('/login', passport.authenticate('local', {
+  failureRedirect: '/user/login',
+  failureFlash: true
+}), (req, res)=> {
+  req.flash("success", "ลงชื่อเข้าใช้เรียบร้อย")
+  res.redirect('/')
+})
+passport.serializeUser(function(user,done){
+  done(null, user.id)
+})
+passport.deserializeUser(function(id,done){
+  usersModel.getUserById(id, (err,user)=>{
+      done(err, user);
+  })
+})
+passport.use(new LocalStrategy(function(username,password,done){ 
+  usersModel.getUserByUsername(username, (err,user)=>{
+      if(err) throw err
+      if(!user){ return done(null, false) }
+
+      usersModel.comparePassword(password, user.password, (err,isMatch)=>{
+          if(err) throw err
+          if(isMatch){
+              return done(null, user)
+          } else {
+              return done(null, false)
+          }
+      });
+  })
+}))
+// --------------------------------------------------
+
+// LOGOUT
+router.get('/logout', (req, res)=>{
+  req.session.destroy((err)=>{
+    res.redirect('/user/login')
+  });
 })
 
 module.exports = router;
