@@ -13,3 +13,8 @@ const studentsSchema = mongoose.Schema({
 })
 const studentsModel = mongoose.model('students', studentsSchema)
 module.exports = studentsModel
+
+module.exports.getStudentsByUsername = (userNAME, callback)=>{
+    let query={ username: userNAME}
+    studentsModel.findOne(query, callback)
+}
