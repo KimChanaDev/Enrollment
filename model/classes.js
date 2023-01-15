@@ -8,10 +8,16 @@ mongoose.connect(dbUrl, {
 const classesSchema = mongoose.Schema({
     title:String,
     description:String,
-    instructor:String
+    instructor:String,
+
+    class_id:String
 })
 const classesModel = mongoose.model('classes', classesSchema)
 module.exports = classesModel
 module.exports.getClasses = function(callback, limit){
     classesModel.find(callback).limit(limit)
+}
+
+module.exports.saveNewClass = function(newClass, callback){
+    newClass.save(callback)
 }

@@ -9,7 +9,12 @@ const instructorsSchema = mongoose.Schema({
     username:String,
     fname:String,
     lname:String,
-    email:String
+    email:String,
+
+    classes:[{     
+        class_id:String,
+        class_title:String,
+    }]
 })
 const instructorsModel = mongoose.model('instructors', instructorsSchema)
 module.exports = instructorsModel

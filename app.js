@@ -3,6 +3,7 @@ const app = express()
 const indexRouter = require('./routes/index')
 const usersRouter = require('./routes/users')
 const instructorsRouter = require('./routes/instructors')
+const classesRouter = require('./routes/classes')
 const path = require('path')
 const session = require('express-session')
 const passport = require('passport')
@@ -28,6 +29,7 @@ app.use(express.static('public'))
 app.use('/', indexRouter)
 app.use('/user', usersRouter)
 app.use('/instructor', instructorsRouter)
+app.use('/classes', classesRouter)
 
 app.listen(3000,()=>{
     console.log("Started server at port 3000");
