@@ -9,9 +9,35 @@
 <body>
     <%- include('../layout.ejs')%>
     <h2 align="center">Hello : <%= instructor.fname %></h2>
-    <hr>
-    <h2 align="center">ADD CLASS</h2>
+
     <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ClassID</th>
+                    <th scope="col">ClassName</th>
+                    <th scope="col">View Lession</th>
+                    <th scope="col">Add Lession</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if(instructor.classes){ %>
+                    <% for( let result of instructor.classes ) { %>
+                        <tr>
+                            <td><%= result.class_id %></td>
+                            <td><%= result.class_title %></td>
+                            <td><a href="#" class="btn btn-success">Views Lession</a></td>
+                            <td><a href="#" class="btn btn-primary">Add Lession</a></td>
+
+                        </tr>
+                    <% } %>
+                <% } %>
+            </tbody>
+        </table>
+        <br><br><br><br>
+        
+        <h2 align="center">ADD CLASS</h2>
+        <hr>
         <form class="form-group" action="/classes/register" method="post">
             <label for="">รหัสวิชา</label>
             <input type="text" name="class_id" class="form-control">
