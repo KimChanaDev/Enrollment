@@ -26,9 +26,9 @@
                         <tr>
                             <td><%= result.class_id %></td>
                             <td><%= result.class_title %></td>
-                            <td><a href="#" class="btn btn-success">Views Lession</a></td>
-                            <td><a href="#" class="btn btn-primary">Add Lession</a></td>
-
+                            <!-- Change link -->
+                            <td><a href="/instructor/classes/<%= result.class_id %>/lesson/view" class="btn btn-success">Views Lesson</a></td>
+                            <td><a href="/instructor/classes/<%= result.class_id %>/lesson/add" class="btn btn-primary">Add Lesson</a></td>
                         </tr>
                     <% } %>
                 <% } %>

@@ -1,0 +1,36 @@
+<!-- Form for add Lession -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instructor</title>
+</head>
+<body>
+    <%- include('../layout.ejs')%>
+    <h2 align="center">Class: <%= class_id %></h2>
+    
+    <div class="container">
+        <h5>ADD LESSON</h5>
+        <hr>
+        <form class="form-group" action="/instructor/classes/<%= class_id %>/lesson/add" method="post">
+            <div class="form-group">
+                <label for="">บทที่</label>
+                <input type="text" name="lesson_number" class="form-control">
+            </div>
+            
+            <div class="form-group">
+                <label for="">หัวข้อ</label>
+                <input type="text" name="lesson_title" class="form-control">
+            </div>
+            
+            <div class="form-group">
+                <label for="">รายละเอียด</label>
+                <textarea name="lesson_body" cols="80" rows="10" class="form-control"></textarea>
+            </div>
+            <input type="submit" value="เพิ่มบทเรียน" class="btn btn-primary">
+        </form>   
+    </div>  
+</body>
+</html>
