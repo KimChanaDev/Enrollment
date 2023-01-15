@@ -69,7 +69,8 @@ router.post('/login', passport.authenticate('local', {
   failureFlash: true
 }), (req, res)=> {
   req.flash("success", "ลงชื่อเข้าใช้เรียบร้อย")
-  res.redirect('/')
+  let usertype = req.user.type
+  res.redirect('/'+usertype+'/classes')
 })
 passport.serializeUser(function(user,done){
   done(null, user.id)

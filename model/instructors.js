@@ -13,3 +13,8 @@ const instructorsSchema = mongoose.Schema({
 })
 const instructorsModel = mongoose.model('instructors', instructorsSchema)
 module.exports = instructorsModel
+
+module.exports.getInstructorByUsername = function(userNAME, callback){
+    let query={ username: userNAME}
+    instructorsModel.findOne(query, callback)
+}

@@ -1,0 +1,29 @@
+<!-- หน้าสำหรับคนที่เป็น instructor -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instructor</title>
+</head>
+<body>
+    <%- include('../layout.ejs')%>
+    <h2 align="center">Hello : <%= instructor.fname %></h2>
+    <hr>
+    <h2 align="center">ADD CLASS</h2>
+    <div class="container">
+        <form class="form-group" action="/classes/register" method="post">
+            <label for="">รหัสวิชา</label>
+            <input type="text" name="class_id" class="form-control">
+            <label for="">ชื่อวิชา</label>
+            <input type="text" name="class_name" class="form-control">
+            <label for="">คำอธิบาย</label>
+            <textarea name="description" cols="80" rows="10" class="form-control"></textarea>
+            <input type="hidden" name="instructor" value="<%= instructor.fname %>">
+        </form>
+        <input type="submit" value="สร้างรายวิชา" class="btn btn-primary">
+    </div>
+    
+</body>
+</html>
