@@ -10,7 +10,6 @@
     <%- include('../layout.ejs') %>
     <div class="container">
         <h2 align="center">เข้าสู่ระบบ</h2>
-        <%- messages() %>
 
         <% if(locals.errors) { %>
             <ul class="alert alert-danger">
@@ -34,9 +33,5 @@
             <input type="submit" value="เข้าสู่ระบบ" class="btn btn-success">
         </form>
     </div>
-
-    <script type="text/javascript">
-        $('#messages').addClass('alert alert-danger')
-    </script>
 </body>
 </html>

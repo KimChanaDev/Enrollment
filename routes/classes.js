@@ -3,6 +3,23 @@ const router = express.Router()
 const classesModel = require('../model/classes')
 const instructorsModel = require('../model/instructors')
 
+router.get('/:id/lesson/view', (req,res)=>{
+    classesModel.getClassID(req.params.id, (err, classes)=>{
+        res.render('classes/viewlesson.ejs', {classes: classes})
+    })
+})
+router.get('/:class_id/lesson/:lesson_number', (req, res)=>{
+    classesModel.getClassID(req.params.class_id, (err, classes)=>{
+        let lesson
+        for( let i=0; i<classes.lesson.length; i++){
+            if(classes.lesson[i].lesson_number == req.params.lesson_number){
+                lesson = classes.lesson[i]
+            }
+        }
+        res.render('classes/lesson.ejs', {classes:classes, lesson:lesson})
+    })
+})
+
 router.post('/register', (req,res)=>{
     const class_name = req.body.class_name
     const class_id = req.body.class_id
@@ -14,14 +31,10 @@ router.post('/register', (req,res)=>{
         title: class_name,
         description: description,
         instructor: instructor
-    })
-    
+    }) 
     classesModel.saveNewClass(newClasses, (err, result)=>{
         if(err) throw err
     })
-
-    // อัพเดทความสัมพันธ์ที่ฝั่ง ตาราง/model instructor
-    //-----------------------------------
     let info = [];
     info['instructor_user'] = req.user.username
     info['class_id'] = class_id
@@ -30,7 +43,6 @@ router.post('/register', (req,res)=>{
     instructorsModel.register(info, (err, instructor)=>{
         if(err) throw err
     })
-    //-----------------------------------
     res.redirect('/instructor/classes')
 })
 

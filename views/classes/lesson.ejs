@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <%- include('../layout.ejs')%>
+    <h2 align="center">Class: <%= classes.title %></h2>
+    <div class="container">
+        <h3>บทที่ : <%= lesson.lesson_number %></h3>
+        <h3>หัวข้อ : <%= lesson.lesson_title %></h3>
+        <p><%= lesson.lesson_body %></p>
+    </div>
+</body>
+</html>

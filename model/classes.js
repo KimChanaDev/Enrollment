@@ -37,3 +37,8 @@ module.exports.addLesson = (info, callback)=>{
                                                             lesson_body: lesson_body }}}
                                         , { save:true, upsert:true }, callback)
 }
+
+module.exports.getClassID = (class_id, callback)=>{
+    let query = {class_id: class_id}
+    classesModel.findOne(query, callback)
+}
