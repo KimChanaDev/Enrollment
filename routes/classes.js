@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const classesModel = require('../model/classes')
+const instructorsModel = require('../model/instructors')
 
 router.post('/register', (req,res)=>{
     const class_name = req.body.class_name
@@ -18,6 +19,18 @@ router.post('/register', (req,res)=>{
     classesModel.saveNewClass(newClasses, (err, result)=>{
         if(err) throw err
     })
+
+    // อัพเดทความสัมพันธ์ที่ฝั่ง ตาราง/model instructor
+    //-----------------------------------
+    let info = [];
+    info['instructor_user'] = req.user.username
+    info['class_id'] = class_id
+    info['class_title'] = class_name
+
+    instructorsModel.register(info, (err, instructor)=>{
+        if(err) throw err
+    })
+    //-----------------------------------
     res.redirect('/instructor/classes')
 })
 

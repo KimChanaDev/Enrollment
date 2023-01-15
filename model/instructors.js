@@ -23,3 +23,12 @@ module.exports.getInstructorByUsername = function(userNAME, callback){
     let query={ username: userNAME}
     instructorsModel.findOne(query, callback)
 }
+
+module.exports.register = function(info, callback){
+    const instructor_user = info['instructor_user']
+    const class_id = info['class_id']
+    const class_title = info['class_title']
+    
+    const query = { username: instructor_user }
+    instructorsModel.findOneAndUpdate( query, {$push:{"classes":{class_id:class_id, class_title:class_title}}}, {safe:true, upsert:true},  callback) 
+}
