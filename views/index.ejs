@@ -16,7 +16,7 @@
               <h1 class="display-5 fw-bold">Enrollment system</h1>
               <p class="col-md-8 fs-4">Using a series of utilities, you can create this jumbotron, just like the one in previous versions of Bootstrap. Check out the examples below for how you can remix and restyle it to your liking.</p>
               <% if(!locals.user) {%>
-                <a class="btn btn-success btn-lg" href="/user/register" type="button">สมัครเรียน</a>
+                <a class="btn btn-success btn-lg" href="/user/register" type="button">ลงทะเบียน</a>
               <% } %>
             </div>
         </div>
@@ -33,7 +33,13 @@
                             <h5 class="card-title"><%= classed.title %></h5>
                             <h6 class="card-subtitle mb-2 text-muted"><%= classed.instructor%></h6>
                             <p class="card-text"><%= classed.description %></p>
-                            <a href="#" class="btn btn-primary ">เข้าเรียน</a>
+                            <form action="/student/classes/register" method="post">
+                                <input type="hidden" name="student_username" value="<%= user.username %>">
+                                <input type="hidden" name="class_id" value="<%= classed.class_id %>">
+                                <input type="hidden" name="class_title" value="<%= classed.title %>">
+
+                                <input type="submit" class="btn btn-primary" value="เข้าเรียน">
+                            </form>
                             </div>
                         </div>
                     </div>
