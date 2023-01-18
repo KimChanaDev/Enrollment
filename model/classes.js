@@ -10,12 +10,12 @@ const classesSchema = mongoose.Schema({
     description:String,
     instructor:String,
     class_id:String,
-    
     lesson:[{
         lesson_number: Number,
         lesson_title: String,
         lesson_body: String
-    }]
+    }],
+    image_url:String
 })
 const classesModel = mongoose.model('classes', classesSchema)
 module.exports = classesModel

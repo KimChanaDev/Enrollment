@@ -13,10 +13,11 @@
         <!-- jumbotron -->
         <div class="p-5 mb-4 bg-light rounded-3">
             <div class="container-fluid py-5">
-              <h1 class="display-5 fw-bold">Enrollment system</h1>
-              <p class="col-md-8 fs-4">Using a series of utilities, you can create this jumbotron, just like the one in previous versions of Bootstrap. Check out the examples below for how you can remix and restyle it to your liking.</p>
+              <h1 class="display-5 fw-bold" align="center">Enrollment system</h1>
               <% if(!locals.user) {%>
-                <a class="btn btn-success btn-lg" href="/user/register" type="button">ลงทะเบียน</a>
+                <div class="d-grid gap-2 col-6 mx-auto">
+                    <a class="btn btn-success btn-lg my-4" href="/user/register" type="button">ลงทะเบียน</a>
+                </div>
               <% } %>
             </div>
         </div>
@@ -26,12 +27,13 @@
             <% if(locals.classes) { %>
                 <div class="row">
                     <% Object.values(classes).forEach(function(classed){ %>
-                    <div class="col-sm-4">
+                    <div class="col-sm-4 my-4">
                         <!-- card -->
                         <div class="card" style="width: 18rem;">
                             <div class="card-body">
+                            <img src="<%= classed.image_url %>" class="card-img-top" alt="...">
                             <h5 class="card-title"><%= classed.title %></h5>
-                            <h6 class="card-subtitle mb-2 text-muted"><%= classed.instructor%></h6>
+                            <h6 class="card-subtitle mb-2 text-muted">ผู้สอน: <%= classed.instructor%></h6>
                             <p class="card-text"><%= classed.description %></p>
                             <form action="/student/classes/register" method="post">
                                 <input type="hidden" name="student_username" value="<%= user.username %>">

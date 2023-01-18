@@ -25,12 +25,14 @@ router.post('/register', (req,res)=>{
     const class_id = req.body.class_id
     const description = req.body.description
     const instructor = req.body.instructor
+    const image_url = req.body.image_url
 
     const newClasses = new classesModel({
         class_id: class_id,
         title: class_name,
         description: description,
-        instructor: instructor
+        instructor: instructor,
+        image_url:image_url
     }) 
     classesModel.saveNewClass(newClasses, (err, result)=>{
         if(err) throw err
@@ -39,7 +41,7 @@ router.post('/register', (req,res)=>{
     info['instructor_user'] = req.user.username
     info['class_id'] = class_id
     info['class_title'] = class_name
-
+    
     instructorsModel.register(info, (err, instructor)=>{
         if(err) throw err
     })
